@@ -1,0 +1,2017 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "SuperMindsIT",
+    "version": "1.0.0",
+    "title": "Wild Cabaret API"
+   },
+  "servers": [
+      {
+        "url": "http://localhost:8080",
+        "description": "Local server"
+      },
+      {
+        "url": "https://wildcabaret-api-python.superminds.dev",
+        "description": "Production server"
+      }
+   ],
+  "tags": [
+      {
+        "name": "Authentication",
+        "description": "API for Authentication. "
+      },
+      {
+        "name": "Booking",
+        "description": "API for Bookings. "
+      },
+      {
+        "name": "Contact Us",
+        "description": "API for Contact Requests. "
+      },
+      {
+        "name": "Event",
+        "description": "API for Events. "
+      },
+      {
+        "name": "Newsletter",
+        "description": "API for Subscribing Newsletters. "
+      }
+   ],
+  "paths": {
+      "/register": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Creates a new user",
+        "description": "This endpoint will create a new user.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>New User Registered</td>\n    <td>Register the User successfully </td>\n  </tr>\n  <tr>\n    <td>400</td>\n    <td>Bad Request</td>\n    <td>If user have incomplete request body.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Invalid Credentials</td>\n    <td>Invalid username or password</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If internal server error occured</td>\n  </tr>\n</table>",
+        "requestBody": {
+          "description": "Register Post Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/register"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "New User Registered",
+            "content": {
+              "application/json": {
+              "schema": {
+              "$ref": "#/components/serverResponseExample/createRegisterSuccess"
+                }
+              }
+            }
+          }, 
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/serverResponseExample/createRegisterError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/serverResponseExample/invalidcredentialsError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/serverResponseExample/serverError"
+                }
+              }
+            }
+          }
+        }
+      }
+      },
+      "/login": {
+        "post": {
+          "tags": [
+            "Authentication"
+          ],
+          "summary": "Creates a new token",
+          "description": "This endpoint will help to login in the system using the Bearer Token.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Token Created</td>\n    <td>Creates the token successfully </td>\n  </tr>\n  <tr>\n    <td>400</td>\n    <td>Bad Request</td>\n    <td>If user have incomplete request body.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Invalid Credentials</td>\n    <td>Invalid username or password</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If internal server error occured</td>\n  </tr>\n</table>",
+          "requestBody": {
+            "description": "Login Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/login"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Token Created",
+              "content": {
+                "application/json": {
+                "schema": {
+                "$ref": "#/components/serverResponseExample/createLoginSuccess"
+                  }
+                }
+              }
+            }, 
+            "400": {
+              "description": "Bad Request.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/createLoginError"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/invalidcredentialsError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/logout": {
+        "delete": {
+          "tags": [
+            "Authentication"
+          ],
+          "summary": "Logouts the user",
+          "description": "This endpoint will help the user to logout from the system.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Logged Out</td>\n    <td>Successfully logouts from the system.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If token has been revoked.</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "security":[{"JWT": {} }],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Logged out",
+              "content": {
+                "application/json": {
+                "schema": {
+                "$ref": "#/components/serverResponseExample/createLogoutSuccess"
+                  }
+                }
+              }
+            }, 
+            "401": {
+              "description": "Unauthorized Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/logoutUnauthorizedError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/book-now": {
+        "get": {
+          "tags": ["Booking"],
+          "summary": "Return bookings",
+          "description": "This endpoint will get all bookings.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Booking Data</td>\n    <td>Return all the bookings.</td>\n  </tr>\n  <tr>\n   <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "responses": {
+            "200": {
+              "description": "Booking Data",
+              "content": {
+                "application/json": {
+                  "example": [
+                    {
+                      "_id": "655cc081add35235c1c1682c",
+                      "contactEmail": "fabio@superminds.dev",
+                      "contactNumber": "100",
+                      "dietaryRequirements": "Yes",
+                      "message": "God Bless You",
+                      "name": "Fabio",
+                      "numberOfGuests": "100",
+                      "showDate": "2024-03-01"              
+                    },
+                    {
+                      "_id": "655cc081add35235c1c1682d",
+                      "contactEmail": "ian@superminds.dev",
+                      "contactNumber": "100",
+                      "dietaryRequirements": "Yes",
+                      "message": "God Bless You",
+                      "name": "Ian",
+                      "numberOfGuests": "100",
+                      "showDate": "2024-03-01"              
+                    }
+                  ]
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Booking"
+          ],
+          "summary": "Create a new Booking",
+          "description": "This endpoint will create a new booking.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n3) The dietaryRequirements must be one of **Yes, No**.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Booking Created</td>\n    <td>Returns the created booking</td>\n  </tr>\n  <tr>\n    <td>400</td>\n    <td>Bad Request</td>\n    <td>Returns the validation errors.</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "requestBody": {
+            "description": "Booking Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/booking"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Booking Created",
+              "content": {
+                "application/json": {
+                "schema": {
+                "$ref": "#/components/serverResponseExample/createBookingSuccess"
+                  }
+                }
+              }
+            }, 
+            "400": {
+              "description": "Bad Request.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/createBookingError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/book-now/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the booking that we want to match",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Booking"
+          ],
+          "summary": "Get Booking with given ID",
+          "description": "This endpoint will get Booking by given ID.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Booking Data</td>\n    <td>Returns the booking with given ID.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found</td>\n    <td>Booking Not Found</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Booking ID",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Booking Data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/getBookingByIdSuccess"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/getBookingByIdNotFoundError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a Booking by ID",
+          "description": "This endpoint will update a booking by given ID.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Booking Data</td>\n    <td>Updates the booking with given ID.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found</td>\n    <td>Booking Not Found</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "security":[{"JWT": {} }],
+          "tags": [
+            "Booking"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Update Booking",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Update Booking",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/booking"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Booking Data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/updateBookingByIdSuccess"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/unauthorizedError"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/getBookingByIdNotFoundError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Booking by ID",
+          "description": "This API Endpoint will delete Booking by ID.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Booking Data</td>\n    <td>Booking Deleted Successfully.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found</td>\n    <td>Booking Not Found</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "security":[{"JWT": {} }],
+          "tags": [
+            "Booking"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Delete booking",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Booking Data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/deleteBookingByIdSuccess"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/unauthorizedError"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/getBookingByIdNotFoundError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/contact-us": {
+          "get": {
+            "tags": [
+              "Contact Us"
+            ],
+            "summary": "Return Contacts",
+            "description": "This endpoint will get all contacts.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Contact Request Data</td>\n    <td>Return all the contact requests.</td>\n  </tr>\n  <tr>\n   <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+            "responses": {
+              "200": {
+                "description": "Contact Us Request Data",
+                "content": {
+                  "application/json": {
+                    "example": [
+                      {
+                      "_id":"655cc081add35235c1c1682c",
+                      "contactEmail": "fabio@superminds.dev",
+                      "contactNumber": "9999988888",
+                      "dietaryRequirements": "5",
+                      "message": "BlessUs",
+                      "name": "Fabio",
+                      "numberOfGuests": "10",
+                      "showDate": "2024-03-01"
+                    },
+                    {
+                      "_id":"655cc081add35235c1c1682c",
+                      "contactEmail": "ian@superminds.dev",
+                      "contactNumber": "9999988888",
+                      "dietaryRequirements": "5",
+                      "message": "BlessUs",
+                      "name": "Ian",
+                      "numberOfGuests": "10",
+                      "showDate": "2024-03-01"
+                    }
+                    ]
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "post": {
+            "tags": [
+              "Contact Us"
+            ],
+            "summary": "Create a new Contact",
+            "description": "This endpoint will create a new contact request.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Contact Request Created</td>\n    <td>Returns the created contact request.</td>\n  </tr>\n  <tr>\n    <td>400</td>\n    <td>Bad Request</td>\n    <td>Returns the validation errors.</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+            "requestBody": {
+              "description": "Contact Request Object",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/contact"
+                  }
+                }
+              }
+            },
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Contact Request Created",
+                "content": {
+                  "application/json": {
+                  "schema": {
+                  "$ref": "#/components/serverResponseExample/createContactSuccess"
+                    }
+                  }
+                }
+              }, 
+              "400": {
+                "description": "Bad Request.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/createContactError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          }
+      },
+      "/contact-us/{id}": {
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the contact that we want to match",
+              "type": "string"
+            }
+          ],
+          "get": {
+            "tags": [
+              "Contact Us"
+            ],
+            "summary": "Get Contact with given ID",
+            "description": "This endpoint will get contact by given ID.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Contact Request Data</td>\n    <td>Returns the contact request with given ID.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found</td>\n    <td>Contact Request Not Found</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "description": "Contact ID",
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Contact Request Data",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/getContactByIdSuccess"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/unauthorizedError"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/getContactByIdNotFoundError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "put": {
+            "summary": "Update a Contact by ID",
+            "description": "This endpoint will update a contact by given ID.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Contact Request Data</td>\n    <td>Updates the contact with given ID.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found</td>\n    <td>Contact Request Not Found</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+            "security":[{"JWT": {} }],
+            "tags": [
+              "Contact Us"
+            ],
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "description": "Contact Us",
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              }
+            ],
+            "requestBody": {
+              "description": "Update a Contact",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/contact"
+                  }
+                }
+              }
+            },
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Contact Request Data",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/updateContactByIdSuccess"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/unauthorizedError"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/getContactByIdNotFoundError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "delete": {
+            "summary": "Delete Contact by ID",
+            "description": "This API Endpoint will delete contact by ID.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Contact Data</td>\n    <td>Contact Deleted Successfully.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found</td>\n    <td>Contact Not Found</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+            "security":[{"JWT": {} }],
+            "tags": [
+              "Contact Us"
+            ],
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "description": "Book contact",
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Contact Data",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/deleteContactByIdSuccess"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/unauthorizedError"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/getContactByIdNotFoundError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          }
+      },
+      "/events": {
+          "get": {
+            "tags": [
+              "Event"
+            ],
+            "summary": "Return Events",
+            "description": "This endpoint will get all events.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Event Request Data</td>\n    <td>Return all the event requests.</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+            "responses": {
+              "200": {
+                "description": "Events Data",
+                "content": {
+                  "application/json": {
+                    "example": [
+                      {
+                      "_id":"655cc081add35235c1c1682c",
+                      "amount": "50",
+                      "childAmount": "50",
+                      "date": "1999-01-09",
+                      "deposit": "10",
+                      "description": "thanks",
+                      "meals": "1",
+                      "reservationsEndsAt": "6:00PM",
+                      "reservationsStartAt": "10:00AM",
+                      "showStarts": "8:00PM",
+                      "status": "book now",
+                      "title": "FRIDAY CABARET SHOW"
+                    },
+                    {
+                      "_id":"655cc081add35235c1c1682d",
+                      "amount": "50",
+                      "childAmount": "50",
+                      "date": "1999-01-09",
+                      "deposit": "10",
+                      "description": "thanks",
+                      "meals": "1",
+                      "reservationsEndsAt": "6:00PM",
+                      "reservationsStartAt": "10:00AM",
+                      "showStarts": "8:00PM",
+                      "status": "book now",
+                      "title": "FRIDAY CABARET SHOW"
+                    }
+                  ]
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "post": {
+            "tags": [
+              "Event"
+            ],
+            "summary": "Create a new Event",
+            "description": "This endpoint will create a new event.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n3) The status must be one of **book now, sold out, cancelled**.\n\n4) The date must be in the format **YYYY-MM-DD**.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>201</td>\n    <td>Event Created</td>\n    <td>Returns the event request.</td>\n  </tr>\n  <tr>\n    <td>400</td>\n    <td>Bad Request</td>\n    <td>Returns the validation errors.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+            "security":[{"JWT": {} }],
+            "requestBody": {
+              "description": "Event Post Object",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/event"
+                  }
+                }
+              }
+            },
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "201": {
+                "description": "Event Created",
+                "content": {
+                  "application/json": {
+                  "schema": {
+                  "$ref": "#/components/serverResponseExample/createEventSuccess"
+                    }
+                  }
+                }
+              }, 
+              "400": {
+                "description": "Bad Request.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/createEventError"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/unauthorizedError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          }
+      },
+      "/events/{id}": {
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the event that we want to match",
+              "type": "string"
+            }
+          ],
+          "get": {
+            "tags": [
+              "Event"
+            ],
+            "summary": "Get Event with given ID",
+            "description": "This endpoint will get event by given ID.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Event Data</td>\n    <td>Returns the event with given ID.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found Error</td>\n    <td>If ID is wrong or Document Not Found.</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+            "securityDefinitions": {
+              "bearerAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization",
+                "description": "Bearer token to access these api endpoints",
+                "scheme": "bearer"
+              }
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "description": "Event id",
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Event Data",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/getEventByIdSuccess"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/unauthorizedIdError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "put": {
+            "summary": "Update a Event by ID",
+            "description": "This endpoint will update Event by given ID.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n3) The status must be one of **book now, sold out, cancelled**.\n\n4) The date must be in the format **YYYY-MM-DD**.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Event Data</td>\n    <td>Updates the event with given ID.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n   <td>404</td>\n    <td>Not Found</td>\n    <td>Event Not Found</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",         
+            "security":[{"JWT": {} }],
+            "tags": [
+              "Event"
+            ],
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "description": "Update Event",
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              }
+            ],
+            "requestBody": {
+              "description": "Update Event Object",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/event"
+                  }
+                }
+              }
+            },
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Event Data",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/updateEventByIdSuccess"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/unauthorizedError"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/getEventByIdNotFoundError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "delete": {
+            "summary": "Delete Event by ID",
+            "description": "This API Endpoint will delete event by ID.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Event Data</td>\n    <td>Event Deleted Successfully.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found Error</td>\n    <td>Event Not Found or Deleted</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",       
+            "security":[{"JWT": {} }],
+            "tags": [
+              "Event"
+            ],
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "description": "Delete Event",
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Event Data",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/deleteEventByIdSuccess"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/unauthorizedError"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/getEventByIdNotFoundError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/serverResponseExample/serverError"
+                    }
+                  }
+                }
+              }
+            }
+          }  
+      },
+      "/events/image": {
+        "post": {
+          "tags": [
+            "Event"
+          ],
+          "summary": "Upload an Image",
+          "description": "This endpoint will upload a new image.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n3) The device_type must be one of **mobile, desktop**.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Event Image Uploaded</td>\n    <td>Returns the fileurl.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found Error</td>\n    <td>EventID Not Found</td>\n  </tr>\n  <tr>\n    <td>413</td>\n    <td>Request Entity Too large</td>\n    <td>If request entity is too large</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "security":[{"JWT": {} }],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": { 
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary",
+                      "nullable": false
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "string",
+                      "nullable": false
+                    },
+                    "device_type": {
+                      "type": "string",
+                      "format": "string",
+                      "nullable": false
+                    }
+                  },
+                  "required": ["file", "id", "device_type"]
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Event Image Uploaded",
+              "content": {
+                "application/json": {
+                "schema": {
+                "$ref": "#/components/serverResponseExample/createEventImageSuccess"
+                  }
+                }
+              }
+            }, 
+            "401": {
+              "description": "Unauthorized Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/unauthorizedError"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/getEventImageByIdNotFoundError"
+                  }
+                }
+              }
+            },
+            "413": {
+              "description": "Request Entity Too large",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/largerEntityError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Image file.",
+          "description": "This endpoint will delete an existing image.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n3) Object_key is the filename from the file_url: https://wild-cabarets.fra1.digitaloceanspaces.com/wild-cabarets/**filename** \n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Event Image Deleted</td>\n    <td>Deletes the file successfully.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>404</td>\n    <td>Not Found Error</td>\n    <td>Event Image Not Found or Deleted.</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "security":[{"JWT": {} }],
+          "tags": [
+            "Event"
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": { 
+                  "type": "object",
+                  "properties": {
+                    "object_key": {
+                      "type": "string",
+                      "format": "string",
+                      "nullable": false
+                    }
+                  },
+                  "required": ["object_key"]
+                }
+              }
+            }
+          },     
+          "responses": {
+            "200": {
+              "description": "Event Image Data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/deleteImageObjectByIdSuccess"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/unauthorizedError"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/deleteEventImageByIdNotFoundError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/newsletter-signup": {
+        "post": {
+          "tags": [
+            "Newsletter"
+          ],
+          "summary": "Subscribe the Newsletter",
+          "description": "This endpoint will subscribe the newsletter.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Newsletter Subscribed</td>\n    <td>Returns the newsletter data.</td>\n  </tr>\n  <tr>\n    <td>400</td>\n    <td>Bad Request</td>\n    <td>Contact Email is required</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "requestBody": {
+            "description": "Newsletter Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/newsletter"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Newsletter Subscribed",
+              "content": {
+                "application/json": {
+                "schema": {
+                "$ref": "#/components/serverResponseExample/createNewsletterSuccess"
+                  }
+                }
+              }
+            }, 
+            "400": {
+              "description": "Bad Request.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/createNewsletterError"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/unauthorizedError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Newsletter"
+          ],
+          "summary": "Return Subscribers",
+          "description": "This endpoint will return all Subscribers.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Subscribers Data</td>\n    <td>Return all the subscribers.</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",           
+          "security":[{"JWT": {} }],
+          "responses": {
+            "200": {
+              "description": "Subscriber Data",
+              "content": {
+                "application/json": {
+                  "example": [
+                  {
+                    "_id":"655cc081add35235c1c1682c",
+                    "email": "fabio@superminds.dev",
+                    "subscribed": true,
+                    "created_at": "2024-01-23T06:24:33.175+00:00",
+                    "updated_at": "2024-01-23T06:24:33.175+00:00"
+                  },
+                  {
+                    "_id":"655cc081add35235c1c1682c",
+                    "email": "ian@superminds.dev",
+                    "subscribed": false,
+                    "created_at": "2024-01-23T06:24:33.175+00:00",
+                    "updated_at": "2024-01-23T06:24:33.175+00:00"
+                  }
+                ]
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/unauthorizedError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/unsubscribe": {
+        "post": {
+          "tags": [
+            "Newsletter"
+          ],
+          "summary": "Newsletter Unsubscribed",
+          "description": "This endpoint will unsubscribe the newsletter.\n\n__Usage__:\n\n1) Click on the **Try it out** button.\n\n2) Click on the **Execute** button to submit the request.\n\n**The below table defines the HTTP Status codes that this API may return**\n\n<table>\n  <tr>\n    <td>Status Code</td>\n    <td>Description</td>\n    <td>Reason</td>\n  </tr>\n  <tr>\n    <td>200</td>\n    <td>Newsletter Unsubscribed</td>\n    <td>Returns the unsubscribed newsletter data.</td>\n  </tr>\n  <tr>\n    <td>400</td>\n    <td>Bad Request</td>\n    <td>Contact Email is required</td>\n  </tr>\n  <tr>\n    <td>401</td>\n    <td>Unauthorized</td>\n    <td>If Missing Authorization Header.</td>\n  </tr>\n  <tr>\n    <td>500</td>\n    <td>Server Error</td>\n    <td>If Internal server error occured.</td>\n  </tr>\n</table>",
+          "requestBody": {
+            "description": "Newsletter Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/newsletter"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Newsletter Unsubscribed",
+              "content": {
+                "application/json": {
+                "schema": {
+                "$ref": "#/components/serverResponseExample/createNewsletterSuccess"
+                  }
+                }
+              }
+            }, 
+            "400": {
+              "description": "Bad Request.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/createNewsletterError"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/unauthorizedError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/serverResponseExample/serverError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+   },
+  "components": {
+    "securitySchemes":{
+    "JWT":{
+        "in": "header",
+        "name": "Authorization",
+        "type": "apiKey",
+        "description": "JWT authorization token. Include 'Bearer' followed by a space and the token value."
+       }
+     },
+    "schemas": {
+      "id": {
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "register": {
+        "type": "object",
+        "required": ["username", "password"],
+        "properties": {
+            "username": {
+                "type": "string",
+                "format": "string"
+              },
+            "password": {
+                "type": "string",
+                "format": "string"
+              }
+        }
+      },
+      "login": {
+        "type": "object",
+        "required": ["username", "password"],
+        "properties": {
+            "username": {
+                "type": "string",
+                "format": "string"
+              },
+            "password": {
+                "type": "string",
+                "format": "number"
+              }
+        }
+      },
+      "logout": {
+        "type": "object",
+        "required": ["username", "password"],
+        "properties": {
+            "username": {
+                "type": "string",
+                "format": "string"
+              },
+            "password": {
+                "type": "string",  
+                "format": "number"
+              }
+        }
+      },
+      "booking":  {
+        "type": "object",
+        "required": ["name", "contactNumber", "contactEmail", "showDate", "numberOfGuests", "dietaryRequirements"],
+        "properties": {
+            "contactEmail": {
+                "type": "string",
+                "format": "email"
+              },
+            "contactNumber": {
+                "type": "string",
+                "format": "string"
+              },
+            "dietaryRequirements": {
+                "type": "string",
+                "format": "string"
+              },
+            "message": {
+                "type": "string",
+                "format": "string"
+              },
+            "name": {
+                "type": "string",
+                "format": "string"
+              },
+            "numberOfGuests": {
+                "type": "string",
+                "format": "string"
+              },
+            "showDate": {
+                "type": "string",
+                "format": "string"
+              }
+        }
+      },
+      "event": {
+        "type": "object",
+        "required": ["amount", "childAmount", "date", "deposit", "description", "meals", "reservationsStartAt", "reservationsEndsAt", "showStarts", "status", "title"],
+        "properties": {
+              "amount": {
+                "type": "string",
+                "format": "string"
+              },
+              "childAmount": {
+                "type": "string",
+                "format": "string"
+              },
+              "date": {
+                "type": "string",
+                "format": "date",
+                "default": "YYYY-MM-DD"
+              },
+              "deposit": {
+                "type": "string",
+                "format": "string",
+                "default": "10"
+              },
+              "description": {
+                "type": "string",
+                "format": "string"
+              },
+              "meals": {
+                "type": "string",
+                "format": "string"
+              },
+              "reservationsStartAt": {
+                "type": "string",
+                "format": "string",
+                "default": "6:30PM"
+              },
+              "reservationsEndsAt": {
+                "type": "string",
+                "format": "string",
+                "default": "7:15PM"
+              },
+              "showStarts": {
+                "type": "string",
+                "format": "string",
+                "default": "8:00PM"
+              },
+              "status": {
+                "type": "string",
+                "format": "string"
+              },
+              "title": {
+                "type": "string",
+                "format": "string"
+              }
+        }
+      },
+      "contact": {
+        "type": "object",
+        "required": ["name", "contactNumber", "contactEmail", "showDate", "numberOfGuests", "dietaryRequirements"],
+        "properties": {
+          "contactEmail": {
+            "type": "string",
+            "format": "email"
+          },
+        "contactNumber": {
+            "type": "string",
+            "format": "string"
+          },
+        "dietaryRequirements": {
+            "type": "string",
+            "format": "string"
+          },
+        "message": {
+            "type": "string",
+            "format": "string"
+          },
+        "name": {
+            "type": "string",
+            "format": "string"
+          },
+        "numberOfGuests": {
+            "type": "string",
+            "format": "string"
+          },
+        "showDate": {
+            "type": "string",
+            "format": "string"
+          }
+        }
+      },
+      "newsletter": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+            "email": {
+                "type": "string",
+                "format": "email"
+            }
+        }
+      }
+     },
+    "serverResponseExample": {
+    "notFound": {
+      "message": "Not Found"
+    },
+    "serverError": {
+      "example": {
+        "message": "Internal server error"
+      }
+    },
+    "invalidcredentialsError": {
+      "example": {
+        "msg": "Invalid Username or Password"
+      }
+    },
+    "unauthorizedError": {
+      "example": {
+        "msg": "Missing Authorization Header"
+      }
+    },
+    "unauthorizedIdError": {
+      "example": {
+        "msg": "Invalid Object ID or Document Not Found"
+      }
+    },
+    "unauthorizedKeyError": {
+      "example": {
+        "msg": "Invalid Object Key"
+      }
+    },
+    "largerEntityError": {
+      "example": {
+        "msg": "Request Entity Too Large"
+      }
+    },
+    "logoutUnauthorizedError": {
+      "example": {
+        "msg": "Token has been revoked"
+      }
+    },
+    "createRegisterError": {
+      "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+              "example": ["Username is required", "Password is required"]
+        }
+      }
+    },
+    "createLoginError": {
+      "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+              "example": ["Username is required", "Password is required"]
+        }
+      }
+    },
+    "createLogoutError": {
+      "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+              "example": ["Access Token is required"]
+        }
+      }
+    },
+    "createBookingError": {
+      "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+              "example": ["contactEmail is required", "contactNumber is required", "dietaryRequirements is required", "name is required", "numberOfGuests is required", "showDate is required", "message is optional"]
+        }
+      }
+    },
+    "createContactError": {
+      "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+              "example": ["contactEmail is required", "contactNumber is required", "dietaryRequirements is required", "name is required", "numberOfGuests is required", "showDate is required", "message is optional"]
+        }
+      }
+    },
+    "createEventError": {
+      "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+              "example": ["amount is required", "childAmount is required", "date is required", "deposit is required", "description is required", "meals is required", "reservationsStartAt is required", "reservationsEndsAt is required", "showStarts is required", "status is required", "title is required"]
+        }
+      }
+    },
+    "validationEventError": {
+      "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+              "example": ["status is required", "status must be one of book now, sold out, cancelled."]
+        }
+      }
+    },
+    "createNewsletterError": {
+      "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+              "example": ["ContactEmail is required"]
+        }
+      }
+    },
+    "createRegisterSuccess": {
+      "example": {
+        "message": "User registered successfully"
+      }
+    },
+    "createLoginSuccess": {
+      "example": {
+        "access_token" :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMTMyNDI0NSwianRpIjoiMGJkNWI2ZGQtYjc5Yy00ODBkLWE3NzAtMzMyYmVkMWFkMWU3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InVzZXIxIiwibmJmIjoxNzAxMzI0MjQ1LCJleHAiOjE3MDEzMjUxNDV9.E1nzEIXCqMMmmE5eGbo6zdEOpVFV_bWeqFzzZ8Zg_48"
+      }
+    },
+    "createLogoutSuccess": {
+      "example": {
+        "message": "Successfully logged out"
+      }
+    },
+    "createBookingSuccess": {
+      "example": {
+        "_id": "655cc081add35235c1c1682c",
+        "contactEmail": "fabio@superminds.dev",
+        "contactNumber": "100",
+        "dietaryRequirements": "Yes",
+        "message": "God Bless You",
+        "name": "Fabio",
+        "numberOfGuests": "100",
+        "showDate": "2024-03-01"              
+      }
+    },
+    "createContactSuccess": {
+      "example": {
+        "_id": "655cc081add35235c1c1682c",
+        "contactEmail": "fabio@superminds.dev",
+        "contactNumber": "100",
+        "dietaryRequirements": "Yes",
+        "message": "God Bless You",
+        "name": "Fabio",
+        "numberOfGuests": "100",
+        "showDate": "2024-03-01"              
+      }
+    },
+    "createEventSuccess": {
+      "example": {
+        "_id":"655cc081add35235c1c1682c",
+        "amount": "50",
+        "childAmount": "50",
+        "date": "1999-01-09",
+        "deposit": "10",
+        "description": "thanks",
+        "meals": "1",
+        "reservationsEndsAt": "7:15PM",
+        "reservationsStartAt": "6:30PM",
+        "showStarts": "8:00PM",
+        "status": "book now",
+        "title": "FRIDAY CABARET SHOW"
+      }
+    },
+    "createEventImageSuccess": {
+      "example": {
+        "file_url": "https://wild-cabarets.fra1.digitaloceanspaces.com/wild-cabarets/filename",
+        "message": "Image uploaded successfully"
+      }
+    },
+    "createNewsletterSuccess": {
+      "example": {
+        "_id":"655cc081add35235c1c1682c",
+        "email": "ian@superminds.dev"
+      }
+    },
+    "getBookingByIdSuccess": {
+      "example": {
+        "_id": "655cc081add35235c1c1682c",
+        "contactEmail": "fabio@superminds.dev",
+        "contactNumber": "100",
+        "dietaryRequirements": "Yes",
+        "message": "God Bless You",
+        "name": "Fabio",
+        "numberOfGuests": "100",
+        "showDate": "2024-03-01"              
+      }
+    },
+    "getContactByIdSuccess": {
+      "example": {
+        "_id": "655cc081add35235c1c1682c",
+        "contactEmail": "fabio@superminds.dev",
+        "contactNumber": "100",
+        "dietaryRequirements": "Yes",
+        "message": "God Bless You",
+        "name": "Fabio",
+        "numberOfGuests": "100",
+        "showDate": "2024-03-01"              
+      }
+    },
+    "getEventByIdSuccess": {
+      "example": {
+        "_id":"655cc081add35235c1c1682c",
+        "amount": "50",
+        "childAmount": "50",
+        "date": "1999-01-09",
+        "deposit": "10",
+        "description": "thanks",
+        "meals": "1",
+        "reservationsEndsAt": "7:15PM",
+        "reservationsStartAt": "6:30PM",
+        "showStarts": "8:00PM",
+        "status": "book now",
+        "title": "FRIDAY CABARET SHOW"
+      }
+    },
+    "getNewsletterByIdSuccess": {
+      "example": {
+        "email": "fabio@superminds.dev",
+        "_id":"655cc081add35235c1c1682c"
+      }
+    },
+    "getBookingByIdNotFoundError": {
+      "example": {
+        "message": "Invalid Object ID or Booking not found" 
+      }
+    },
+    "getContactByIdNotFoundError": {
+      "example": {
+        "message": "Invalid Object ID or Contact not found" 
+      }
+    },
+    "getEventByIdNotFoundError": {
+      "example": {
+        "message": "Invalid Object ID or Event not found" 
+      }
+    },
+    "getEventImageByIdNotFoundError": {
+      "example": {
+        "message": "Invalid Object ID or File not found" 
+      }
+    },
+    "deleteEventImageByIdNotFoundError": {
+      "example": {
+        "message": "Invalid Object Key" 
+      }
+    },
+    "getNewsletterByIdNotFoundError": {
+      "example": {
+        "message": "Invalid Object ID or Newsletter not found" 
+      }
+    },
+    "updateBookingByIdSuccess": {
+      "example": {
+        "_id": "655cc081add35235c1c1682c",
+        "contactEmail": "fabio@superminds.dev",
+        "contactNumber": "100",
+        "dietaryRequirements": "Yes",
+        "message": "God Bless You",
+        "name": "Fabio",
+        "numberOfGuests": "100",
+        "showDate": "2024-03-01"              
+      }
+    },
+    "updateContactByIdSuccess": {
+      "example": {
+        "_id": "655cc081add35235c1c1682c",
+        "contactEmail": "fabio@superminds.dev",
+        "contactNumber": "100",
+        "dietaryRequirements": "Yes",
+        "message": "God Bless You",
+        "name": "Fabio",
+        "numberOfGuests": "100",
+        "showDate": "2024-03-01"              
+      }
+    },
+    "updateEventByIdSuccess": {
+      "example": {
+        "_id":"655cc081add35235c1c1682c",
+        "amount": "50",
+        "childAmount": "50",
+        "date": "1999-01-09",
+        "deposit": "10",
+        "description": "thanks",
+        "meals": "1",
+        "reservationsEndsAt": "6:00PM",
+        "reservationsStartAt": "10:00AM",
+        "showStarts": "8:00PM",
+        "status": "book now",
+        "title": "FRIDAY CABARET SHOW"
+      }
+    },
+    "updateNewsletterByIdSuccess": {
+      "example": {
+        "_id":"655cc081add35235c1c1682c",
+        "email": "ian@superminds.dev"
+      }
+    },
+    "deleteBookingByIdSuccess": {
+      "example": {
+        "message": "Booking Deleted successfully"
+      }
+    },
+    "deleteContactByIdSuccess": {
+      "example": {
+        "message": "Contact Deleted successfully"
+      }
+    },
+    "deleteEventByIdSuccess": {
+      "example": {
+        "message": "Event Deleted successfully"
+      }
+    },
+    "deleteEventImageByIdSuccess": {
+      "example": {
+        "message": "File gradientrectangle.jpg deleted successfully"
+      }
+    },
+    "deleteImageObjectByIdSuccess": {
+      "example": {
+        "message": "File deleted successfully"
+      }
+    },
+    "deleteNewsletterByIdSuccess": {
+      "example": {
+        "message": "Newsletter Deleted successfully"
+      }
+    }
+    }
+    }
+  }
